@@ -1,0 +1,3 @@
+package com.functionhall.controller;
+import com.functionhall.dao.UserDAO;import com.functionhall.model.User;import jakarta.servlet.annotation.WebServlet;import jakarta.servlet.http.*;import java.io.*;
+@WebServlet("/register") public class RegisterServlet extends HttpServlet{protected void doPost(HttpServletRequest q,HttpServletResponse p)throws IOException{try{User u=new User();u.setName(q.getParameter("name"));u.setEmail(q.getParameter("email"));u.setPhone(q.getParameter("phone"));u.setPassword(q.getParameter("password"));new UserDAO().register(u);p.sendRedirect("login.jsp?registered=1");}catch(Exception e){p.sendRedirect("register.jsp?error=1");}}}

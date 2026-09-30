@@ -1,0 +1,3 @@
+package com.functionhall.controller;
+import com.functionhall.dao.PaymentDAO;import com.functionhall.model.Payment;import jakarta.servlet.annotation.WebServlet;import jakarta.servlet.http.*;import java.io.*;
+@WebServlet("/payment") public class PaymentServlet extends HttpServlet{protected void doPost(HttpServletRequest q,HttpServletResponse p)throws IOException{try{Payment x=new Payment();x.setBookingId(Integer.parseInt(q.getParameter("bookingId")));x.setAmount(Double.parseDouble(q.getParameter("amount")));x.setPaymentMethod(q.getParameter("method"));x.setTransactionId("DEMO-"+System.currentTimeMillis());x.setPaymentStatus("SUCCESS");new PaymentDAO().save(x);p.sendRedirect("my-bookings.jsp?paid=1");}catch(Exception e){throw new IOException(e);}}}

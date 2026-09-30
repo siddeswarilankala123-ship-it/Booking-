@@ -1,0 +1,3 @@
+package com.functionhall.controller;
+import com.functionhall.dao.UserDAO;import com.functionhall.model.User;import jakarta.servlet.annotation.WebServlet;import jakarta.servlet.http.*;import java.io.*;
+@WebServlet("/login") public class LoginServlet extends HttpServlet{protected void doPost(HttpServletRequest q,HttpServletResponse p)throws IOException{try{User u=new UserDAO().login(q.getParameter("email"),q.getParameter("password"));if(u!=null){q.getSession().setAttribute("user",u);p.sendRedirect("index.jsp");}else p.sendRedirect("login.jsp?error=1");}catch(Exception e){throw new IOException(e);}}}
